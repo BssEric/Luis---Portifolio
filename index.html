@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portifolio - Luís Novais</title>
+  <meta name="description" content="Portfólio de repórter com projetos, redes sociais e animação em Three.js." />
+  <link rel="shortcut icon" href="IMGS/WhatsApp Image 2025-08-16 at 21.05.32.jpeg" type="image/x-icon">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <style>
+    :root{
+      --bg:#061a2e;          /* azul noite */
+      --bg-2:#0b2c4d;        /* azul profundo */
+      --primary:#2a7bd8;     /* azul principal */
+      --primary-2:#6fb1ff;   /* azul claro */
+      --text:#ffffff;        /* quase branco azulado */
+      --muted:#a8c3e8;
+      --card:#0a2240;
+      --accent:#5ea0ff;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 10% -10%, #123766 0%, transparent 60%),
+                  radial-gradient(1200px 600px at 100% 10%, #0d2a53 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg) 0%, #051423 100%);
+      overflow-x:hidden;
+    }
+    a{color:var(--primary-2); text-decoration:none}
+    a:hover{color:white}
+    .container{width:min(1200px,92%); margin-inline:auto}
+
+    /* NAV */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, rgba(3,13,26,.8), rgba(3,13,26,.35) 70%, transparent);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .brand-badge{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg, var(--primary), var(--accent)); display:grid;place-items:center; box-shadow:var(--shadow)}
+    .brand-badge span{font-weight:900}
+    .nav a{margin-left:18px; font-weight:600; opacity:.9}
+    .btn{display:inline-grid; place-items:center; padding:12px 18px; border-radius:999px; font-weight:700;
+      background:linear-gradient(145deg, var(--primary), var(--accent)); color:#041220; box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
+
+    /* HERO */
+    .hero{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:center; padding:64px 0 24px}
+    .hero h1{font-size:clamp(36px, 5vw, 56px); line-height:1.05; margin:0 0 14px}
+    .hero p{font-size:clamp(16px,1.7vw,18px); color:var(--muted)}
+    .tag{display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(110, 169, 255, 0.12); border:1px solid rgba(110,169,255,.25); color:var(--primary-2); font-weight:700; letter-spacing:.2px}
+    .cta{display:flex; gap:14px; margin-top:20px; flex-wrap:wrap}
+
+    .profile-img{width:100%; max-width:400px; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.08); transition:transform 0.3s}
+    .profile-img:hover{transform:scale(1.02)}
+
+    /* SECTIONS */
+    section{padding:64px 0}
+    h2{font-size:clamp(24px,3.8vw,36px); margin:0 0 12px}
+    .sub{color:var(--muted); margin:0 0 28px}
+
+    /* PROJECTS */
+    .grid{display:grid; grid-template-columns:repeat(12, 1fr); gap:18px}
+    .card{grid-column:span 12; background:linear-gradient(180deg, var(--card), #071c33); border:1px solid rgba(255,255,255,.07); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden; transition:transform 0.3s}
+    .card:hover{transform:translateY(-2px)}
+    .thumb{height:180px; border-radius:14px; background:linear-gradient(135deg, rgba(60,130,220,.25), rgba(40,90,200,.2)); border:1px solid rgba(255,255,255,.06); display:grid; place-items:center; font-weight:800; letter-spacing:1px}
+    .card h3{margin:12px 0 6px; color: white;}
+    .card p{color:var(--muted); margin:0 0 12px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chips .chip{padding:6px 10px; font-weight:600; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(6px); color:var(--text); border-radius:999px; cursor:pointer}
+
+    @media (min-width:700px){
+      .card{grid-column:span 6}
+    }
+    @media (min-width:1024px){
+      .card{grid-column:span 4}
+    }
+
+    /* SOCIAL */
+    .socials{display:flex; gap:12px; flex-wrap:wrap}
+    .social{display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.05); text-decoration: none; color: var(--text); transition: all 0.3s}
+    .social:hover{background:rgba(255,255,255,.1); transform:translateY(-2px)}
+    .social svg{width:18px; height:18px}
+
+    /* FOOTER */
+    footer{padding:36px 0 64px; color:var(--muted); border-top:1px solid rgba(255,255,255,.06); text-align: center}
+
+    /* Responsividade Bootstrap */
+    @media (max-width: 992px) {
+      .hero{grid-template-columns:1fr; text-align:center}
+      .hero-content{order:2}
+      .hero-image{order:1; display:flex; justify-content:center; margin-bottom:2rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true"><span>L</span></div>
+        <span>Luís Novais</span>
+      </div>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#redes">Redes</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero" id="sobre">
+      <div class="hero-content">
+        <span class="tag">Jornalismo • Reportagens • Apresentação</span>
+        <h1>Olá, sou <span style="color:var(--primary-2)">Luís Novais</span>, Estudante de jornalismo especializado em <span style="color:var(--primary)">Esportes e pauta diária</span>.</h1>
+        <p>Conto histórias com rigor, empatia e responsabilidade. Experiência em plataformas digitais. Abaixo você encontra meus trabalhos e como falar comigo.</p>
+        <div class="cta">
+          <a class="btn" href="#projetos">Ver projetos</a>
+          <a class="btn" style="background:rgba(255,255,255,.08); color:var(--text); border:1px solid rgba(255,255,255,.12)" href="#contato">Solicitar pauta</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="IMGS/WhatsApp Image 2025-09-01 at 13.56.27.jpeg" alt="Luís Novais - Repórter" class="profile-img">
+      </div>
+    </section>
+
+    <!-- Projetos Section -->
+    <section id="projetos">
+      <h2>Projetos em Destaque</h2>
+      <p class="sub">Reportagens, esportes e coberturas multimídia.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb"><img src="IMGS/Projeto2.jpeg" alt="" height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Taça das Favelas</h3>
+          <p>Entrevista com os destaques do jogo.</p>
+          <div class="chips">
+            <span class="chip">Jornal</span>
+            <span class="chip">Entrevista</span>
+            <span class="chip">Esportes</span>
+            <span class="chip"><a href="http://www.instagram.com/reel/DL8Hi0UxBHG/?igsh=MWs0N3MzZzBrOXFlaA==" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+        <article class="card">
+           <div class="thumb"><img src="IMGS/Projeto1.jpeg" alt=""height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Taça das Favelas</h3>
+          <p>Entrevista com Carreto muito loko.</p>
+          <div class="chips">
+            <span class="chip">Jornal</span>
+            <span class="chip">Entrevista</span>
+            <span class="chip">Esportes</span>
+            <span class="chip"><a href="https://www.instagram.com/reel/DNYLB2kxxXH/?igsh=dmx6cnJpZHRncDg2" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img src="IMGS/projeto3.jpeg" alt="" height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Taça das Favelas</h3>
+          <p>Quiz com os Telespectadores.</p>
+          <div class="chips">
+            <span class="chip">Jornal</span>
+            <span class="chip">Entrevista</span>
+            <span class="chip">Esportes</span>
+            <span class="chip"><a href="https://www.instagram.com/reel/DM7175_s7pj/?igsh=aTFoajI5eW95bGx5" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img src="IMGS/projeto6.png" alt="" height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Taça das Favelas</h3>
+          <p>Entrevista com a Familia Martinez.</p>
+          <div class="chips">
+            <span class="chip">Jornal</span>
+            <span class="chip">Entrevista</span>
+            <span class="chip">Esportes</span>
+            <span class="chip"><a href="https://sp.tacadasfavelas.com.br/familia-martinez-se-reune-para-acompanhar-goleiro-na-taca/" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img src="IMGS/projeto5.jpeg" alt="" height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Festivais Audios Visuais</h3>
+          <p>Cinemas e artes Visuais.</p>
+          <div class="chips">
+            <span class="chip">Cinema</span>
+            <span class="chip">Reportagem</span>
+            <span class="chip"><a href="https://youtu.be/SlOmNddn3T4?si=ovr-F-cpl8Gx7Qaj" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img src="IMGS/projeto4.jpeg" alt="" height="180px" width="340px" style="border-radius: 10px;"></div>
+          <h3>Podcast</h3>
+          <p>Check-In na Faculdade.</p>
+          <div class="chips">
+            <span class="chip">multimídia</span>
+            <span class="chip">Narrativa</span>
+            <span class="chip">Educação</span>
+            <span class="chip"><a href="https://youtu.be/xEcHTa7SviI?si=w8-DEdWuqr4c3O3x" target="_blank" rel="noopener noreferrer">Ver Entrevista</a></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Redes Section -->
+    <section id="redes">
+      <h2>Redes & Contato</h2>
+      <p class="sub">Acompanhe meu trabalho e fale comigo.</p>
+      <div class="socials">
+        <a class="social" href="https://www.linkedin.com/in/luishenriquenovais?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+          LinkedIn
+        </a>
+        <a class="social" href="https://www.instagram.com/luisnovais__?igsh=ZnE2bjQ5bG5jOWwx" target="_blank" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+          Instagram
+        </a>
+      </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato">
+      <h2>Vamos conversar?</h2>
+      <p class="sub">Disponível para reportagens, apresentações e projetos especiais.</p>
+      <a class="btn" href="mailto:Luis.10.novais@gmail.com">Enviar e-mail</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Luis Novais • Jornalismo responsável.</div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // utilidades
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // âncoras suaves
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+      })
+    })
+  </script>
+</body>
+</html>
